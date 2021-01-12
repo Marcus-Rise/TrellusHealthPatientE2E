@@ -2,3 +2,4 @@
 .run
 .env*.local
 node_modules
+**/__diff_output__
