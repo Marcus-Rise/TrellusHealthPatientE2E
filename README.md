@@ -20,6 +20,12 @@ npm run test
 npm run test:update
 ```
 
+## ENV
+
+Before run tests user need to define values for env vars.
+
+To define vars user need to copy `.env.test.local` file from`.env.test` file with filled values.
+
 ## Docs
 
 1. [Official docs](https://pptr.dev/)
