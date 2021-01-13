@@ -1,26 +1,22 @@
 import { getScreenShot } from "../utils/get-screenshot.function";
-import { getCredentials } from "../utils/get-credentials.function";
-import { getAppBaseUrl } from "../utils/get-app-base-url.function";
+import type { IAppEnv } from "../utils/get-app-env.function";
+import { getAppEnv } from "../utils/get-app-env.function";
 
 describe("Login page", () => {
-  let baseAppUrl: string;
-  let appUrl: string;
+  let env: IAppEnv;
 
   beforeAll(async () => {
-    baseAppUrl = await getAppBaseUrl();
-    appUrl = baseAppUrl + "/login";
-
-    expect(appUrl.length).toBeGreaterThan(0);
+    env = await getAppEnv();
   });
 
   test("open", async () => {
-    await page.goto(appUrl);
+    await page.goto(env.appUrl + "/login");
 
     await expect(getScreenShot()).resolves.toMatchImageSnapshot();
   });
 
   test("wrong email mask", async () => {
-    await page.goto(appUrl);
+    await page.goto(env.appUrl + "/login");
 
     await page.type(`input[type=text]`, "username");
     await page.type(`input[type=password]`, "password");
@@ -34,24 +30,22 @@ describe("Login page", () => {
   });
 
   test("right email mask", async () => {
-    await page.goto(appUrl);
+    await page.goto(env.appUrl + "/login");
 
-    const credentials = await getCredentials();
-
-    await page.type(`input[type=text]`, credentials.login);
-    await page.type(`input[type=password]`, credentials.password);
+    await page.type(`input[type=text]`, env.user.login);
+    await page.type(`input[type=password]`, env.user.password);
     await page.click(`button[type=submit]`);
 
     await page.waitForNavigation();
 
-    await page.type(`input[type=text]`, credentials.login);
-    await page.type(`input[type=password]`, credentials.password);
+    await page.type(`input[type=text]`, env.user.login);
+    await page.type(`input[type=password]`, env.user.password);
     await page.click(`button[type=submit]`);
 
     await page.waitForNavigation();
 
     await expect(getScreenShot()).resolves.toMatchImageSnapshot();
 
-    expect(page.url()).toBe(baseAppUrl + "/home/my-dashboard");
+    expect(page.url()).toBe(env.appUrl + "/home/my-dashboard");
   });
 });

@@ -1,19 +1,20 @@
-import { getAppBaseUrl } from "../utils/get-app-base-url.function";
+import type { IAppEnv } from "../utils/get-app-env.function";
+import { getAppEnv } from "../utils/get-app-env.function";
 
 describe("Api", () => {
-  let appUrl: string;
+  let env: IAppEnv;
 
   beforeAll(async () => {
-    appUrl = (await getAppBaseUrl()) + "/api";
+    env = await getAppEnv();
   });
 
   test("health", async () => {
-    const response = await page.goto(appUrl);
+    const response = await page.goto(env.apiUrl + "/api");
     expect(response?.status()).toBe(200);
   });
 
   test("invalid url return 404", async () => {
-    const response = await page.goto(appUrl + "/awdawd");
+    const response = await page.goto(env.apiUrl + "/api/awwadwad");
     expect(response?.status()).toBe(404);
   });
 });
