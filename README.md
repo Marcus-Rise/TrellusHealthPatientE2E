@@ -14,3 +14,8 @@ npm run test
 ```shell
 npm run test:update
 ```
+
+## Docs
+
+1. [Official docs](https://pptr.dev/)
+2. [Env tool](https://www.npmjs.com/package/jest-environment-puppeteer)
