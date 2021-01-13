@@ -14,15 +14,13 @@ describe("Login page", () => {
   });
 
   test("open", async () => {
-    const response = await page.goto(appUrl);
-    expect(response?.status()).toBe(200);
+    await page.goto(appUrl);
 
     await expect(getScreenShot()).resolves.toMatchImageSnapshot();
   });
 
   test("wrong email mask", async () => {
-    const response = await page.goto(appUrl);
-    expect(response?.status()).toBe(200);
+    await page.goto(appUrl);
 
     await page.type(`input[type=text]`, "username");
     await page.type(`input[type=password]`, "password");
@@ -36,8 +34,7 @@ describe("Login page", () => {
   });
 
   test("right email mask", async () => {
-    const response = await page.goto(appUrl);
-    expect(response?.status()).toBe(200);
+    await page.goto(appUrl);
 
     const credentials = await getCredentials();
 
