@@ -1,38 +1,34 @@
 import { getScreenShot } from "../src/get-screenshot.function";
 import { getCredentials } from "../src/get-credentials.function";
+import { getAppBaseUrl } from "../src/get-app-base-url.function";
 
 describe("Login page", () => {
   let baseAppUrl: string;
   let appUrl: string;
 
   beforeAll(async () => {
-    baseAppUrl = String(process.env.APP_URL);
+    baseAppUrl = await getAppBaseUrl();
     appUrl = baseAppUrl + "/login";
 
     expect(appUrl.length).toBeGreaterThan(0);
   });
 
-  beforeEach(async () => {
-    await page.goto(appUrl);
-
+  test("open", async () => {
     const response = await page.goto(appUrl);
     expect(response?.status()).toBe(200);
-  });
 
-  test("open", async () => {
-    const image = await getScreenShot();
-
-    expect(image).toMatchImageSnapshot();
+    await expect(getScreenShot()).resolves.toMatchImageSnapshot();
   });
 
   test("wrong email mask", async () => {
+    const response = await page.goto(appUrl);
+    expect(response?.status()).toBe(200);
+
     await page.type(`input[type=text]`, "username");
     await page.type(`input[type=password]`, "password");
     await page.click(`button[type=submit]`);
 
-    const image = await getScreenShot();
-
-    expect(image).toMatchImageSnapshot();
+    await expect(getScreenShot()).resolves.toMatchImageSnapshot();
 
     await expect(page.evaluate(() => document.body.innerHTML)).resolves.toContain(
       "You have entered an invalid email or password.",
@@ -40,6 +36,9 @@ describe("Login page", () => {
   });
 
   test("right email mask", async () => {
+    const response = await page.goto(appUrl);
+    expect(response?.status()).toBe(200);
+
     const credentials = await getCredentials();
 
     await page.type(`input[type=text]`, credentials.login);
@@ -54,9 +53,7 @@ describe("Login page", () => {
 
     await page.waitForNavigation();
 
-    const image = await getScreenShot();
-
-    expect(image).toMatchImageSnapshot();
+    await expect(getScreenShot()).resolves.toMatchImageSnapshot();
 
     expect(page.url()).toBe(baseAppUrl + "/home/my-dashboard");
   });
