@@ -18,4 +18,5 @@ npm run test:update
 ## Docs
 
 1. [Official docs](https://pptr.dev/)
+1. [Official api docs](https://github.com/puppeteer/puppeteer/blob/main/docs/)
 2. [Env tool](https://www.npmjs.com/package/jest-environment-puppeteer)
