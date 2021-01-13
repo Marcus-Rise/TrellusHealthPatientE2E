@@ -1,6 +1,6 @@
-import { getScreenShot } from "../src/get-screenshot.function";
-import { getCredentials } from "../src/get-credentials.function";
-import { getAppBaseUrl } from "../src/get-app-base-url.function";
+import { getScreenShot } from "../utils/get-screenshot.function";
+import { getCredentials } from "../utils/get-credentials.function";
+import { getAppBaseUrl } from "../utils/get-app-base-url.function";
 
 describe("Login page", () => {
   let baseAppUrl: string;

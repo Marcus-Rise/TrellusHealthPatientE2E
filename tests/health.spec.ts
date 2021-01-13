@@ -1,4 +1,4 @@
-import { getAppBaseUrl } from "../src/get-app-base-url.function";
+import { getAppBaseUrl } from "../utils/get-app-base-url.function";
 
 describe("Health", () => {
   test("health", async () => {
