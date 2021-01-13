@@ -1,7 +1,8 @@
 # E2E testing project for patient app
 
-It can capture screenshot and compare it at future test iteration.
-It can reduce manual testing time.
+* Can capture screenshot and compare it at future test iteration.
+* Can reduce manual testing time.
+* Can be run in CI/CD after deploy stage
 
 ## Explain (official)
 
