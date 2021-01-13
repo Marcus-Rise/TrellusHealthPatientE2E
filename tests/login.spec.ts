@@ -38,6 +38,8 @@ describe("Login page", () => {
 
     await page.waitForNavigation();
 
+    expect(page.url()).toBe(env.appUrl + "/login");
+
     await page.type(`input[type=text]`, env.user.login);
     await page.type(`input[type=password]`, env.user.password);
     await page.click(`button[type=submit]`);
