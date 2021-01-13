@@ -3,6 +3,10 @@
 It can capture screenshot and compare it at future test iteration.
 It can reduce manual testing time.
 
+## Explain (official)
+
+[Presentation by Google](https://developers.google.com/web/tools/puppeteer)
+
 ## Run all tests
 
 ```shell 
