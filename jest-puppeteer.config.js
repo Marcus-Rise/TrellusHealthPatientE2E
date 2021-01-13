@@ -1,3 +1,6 @@
+/**
+ * @inheritDoc https://github.com/puppeteer/puppeteer/blob/main/docs/api.md#puppeteerlaunchoptions
+ */
 module.exports = {
   launch: {
     // dumpio: true,
