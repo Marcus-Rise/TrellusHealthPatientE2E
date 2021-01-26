@@ -36,17 +36,11 @@ describe("Login page", () => {
     await page.type(`input[type=password]`, env.user.password);
     await page.click(`button[type=submit]`);
 
-    await page.waitForNavigation();
+    const res = await page.waitForResponse(env.apiUrl + "/api/cognitoidentity/signin");
 
-    expect(page.url()).toBe(env.appUrl + "/login");
-
-    await page.type(`input[type=text]`, env.user.login);
-    await page.type(`input[type=password]`, env.user.password);
-    await page.click(`button[type=submit]`);
+    expect(res.status()).toBe(200);
 
     await page.waitForNavigation();
-
-    await expect(getScreenShot()).resolves.toMatchImageSnapshot();
 
     expect(page.url()).toBe(env.appUrl + "/home/my-dashboard");
   });
