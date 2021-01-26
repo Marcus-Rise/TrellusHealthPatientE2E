@@ -10,7 +10,9 @@ describe("Login page", () => {
   });
 
   test("open", async () => {
-    await page.goto(env.appUrl + "/login");
+    const res = await page.goto(env.appUrl + "/login");
+
+    expect(res?.status()).toBe(200);
 
     await expect(getScreenShot()).resolves.toMatchImageSnapshot();
   });
